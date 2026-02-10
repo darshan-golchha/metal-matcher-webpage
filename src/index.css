@@ -1,65 +1,44 @@
 @import "tailwindcss";
 
 /* ========================================
-   MetalMatcher Design System
-   Dark theme inspired by Apple Metal
+   MetalMatcher — Premium Dark Theme
    ======================================== */
 
 :root {
-  /* Colors */
-  --color-bg-primary: #000000;
-  --color-bg-secondary: #0a0a0a;
-  --color-bg-tertiary: #111111;
-  --color-bg-card: rgba(255, 255, 255, 0.03);
-  --color-bg-card-hover: rgba(255, 255, 255, 0.06);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --bg-0: #06080d;
+  --bg-1: #0b0f19;
+  --bg-2: #111827;
+  --bg-3: #1a2035;
+  --bg-card: rgba(17, 24, 39, 0.55);
 
-  --color-text-primary: #f5f5f7;
-  --color-text-secondary: #a1a1aa;
-  --color-text-tertiary: #71717a;
+  --border: rgba(55, 65, 81, 0.4);
+  --border-accent: rgba(99, 102, 241, 0.35);
 
-  --color-accent-blue: #6366f1;
-  --color-accent-cyan: #06b6d4;
-  --color-accent-purple: #8b5cf6;
+  --text-0: #f0f4fc;
+  --text-1: #94a3b8;
+  --text-2: #64748b;
+  --text-3: #475569;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-  --gradient-text: linear-gradient(135deg, #818cf8 0%, #22d3ee 50%, #a78bfa 100%);
-  --gradient-hero: linear-gradient(180deg, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
-  --gradient-card-border: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(6, 182, 212, 0.1));
+  --accent: #818cf8;
+  --accent-bright: #a5b4fc;
+  --accent-dim: #6366f1;
+  --green: #34d399;
+  --amber: #fbbf24;
+  --rose: #fb7185;
 
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
-  --font-size-6xl: 3.75rem;
-  --font-size-7xl: 4.5rem;
-  --font-size-8xl: 6rem;
+  --grad-text: linear-gradient(135deg, #c7d2fe 0%, #818cf8 45%, #a78bfa 100%);
+  --grad-primary: linear-gradient(135deg, #818cf8, #6366f1);
+  --grad-glow-top: radial-gradient(ellipse 60% 45% at 50% -5%, rgba(99, 102, 241, 0.12), transparent);
+  --grad-glow-bottom: radial-gradient(ellipse 70% 40% at 50% 105%, rgba(139, 92, 246, 0.07), transparent);
 
-  /* Spacing */
-  --section-padding: 120px;
-  --container-max: 1200px;
-  --container-padding: 24px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Menlo', monospace;
 
-  /* Effects */
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-blur: blur(20px);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.06);
-  --transition-default: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --section-py: 120px;
+  --container: 1200px;
+  --px: 24px;
 }
-
-/* ========================================
-   Base
-   ======================================== */
 
 *,
 *::before,
@@ -76,46 +55,56 @@ html {
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  font-family: var(--font);
+  background: var(--bg-0);
+  color: var(--text-0);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.3);
+  background: rgba(129, 140, 248, 0.25);
   color: white;
 }
 
 /* ========================================
-   Utilities
+   Layout
    ======================================== */
 
 .container {
-  max-width: var(--container-max);
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--container-padding);
+  padding: 0 var(--px);
 }
 
+.section {
+  padding: var(--section-py) 0;
+  position: relative;
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+
 .gradient-text {
-  background: var(--gradient-text);
+  background: var(--grad-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .section-label {
-  font-size: var(--font-size-sm);
+  font-size: 0.8125rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--color-accent-cyan);
+  letter-spacing: 0.16em;
+  color: var(--accent);
   margin-bottom: 16px;
+  display: inline-block;
 }
 
 .section-title {
-  font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
+  font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -123,10 +112,19 @@ body {
 }
 
 .section-subtitle {
-  font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-xl));
-  color: var(--color-text-secondary);
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  color: var(--text-1);
   line-height: 1.7;
   max-width: 700px;
+}
+
+.section-center {
+  text-align: center;
+}
+
+.section-center .section-subtitle {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ========================================
@@ -136,44 +134,79 @@ body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(32px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes glow-breathe {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes float-gentle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+@keyframes typing-cursor {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.1); }
-  50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.2); }
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-@keyframes countUp {
-  from { opacity: 0; transform: scale(0.5); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
 .animate-on-scroll {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
 }
 
 .animate-on-scroll.visible {
@@ -181,9 +214,40 @@ body {
   transform: translateY(0);
 }
 
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-.stagger-6 { transition-delay: 0.6s; }
+.stagger-1 {
+  transition-delay: 0.06s;
+}
+
+.stagger-2 {
+  transition-delay: 0.12s;
+}
+
+.stagger-3 {
+  transition-delay: 0.18s;
+}
+
+.stagger-4 {
+  transition-delay: 0.24s;
+}
+
+.stagger-5 {
+  transition-delay: 0.30s;
+}
+
+.stagger-6 {
+  transition-delay: 0.36s;
+}
+
+/* ========================================
+   Dot Grid Background Pattern
+   ======================================== */
+
+.dot-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(99, 102, 241, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black, transparent);
+}
