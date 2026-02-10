@@ -49,7 +49,7 @@ function App() {
             <span className="gradient-text">MetalMatcher</span>
           </h1>
           <p className="hero-tagline">
-            Autonomous entity matching that's <strong>10× faster</strong> than CPU solutions.<br />
+            Autonomous entity matching that's <strong>faster</strong> than CPU solutions.<br />
             No manual rules. No labeling. Just fast, intelligent data reconciliation.
           </p>
           <div className="hero-cta">
@@ -100,16 +100,16 @@ function App() {
             </div>
             <div className="pipeline-grid">
               <div className="pipeline-info">
-                <h3>Multi-Algorithm Candidate Generation</h3>
+                <h3>Intelligent Candidate Generation</h3>
                 <p>
                   Reduces the search space from millions of pairs to a manageable set of candidates
-                  using GPU-accelerated MinHash, token Jaccard, and exact-match algorithms —
+                  using proprietary GPU-accelerated blocking algorithms —
                   all selected automatically based on column data types.
                 </p>
                 <ul>
                   <li><span className="check">✓</span> Automatic data type detection per column</li>
                   <li><span className="check">✓</span> 99%+ search space reduction</li>
-                  <li><span className="check">✓</span> GPU-parallel MinHash for text columns</li>
+                  <li><span className="check">✓</span> GPU-parallel processing for text columns</li>
                 </ul>
               </div>
               <div className="code-editor">
@@ -122,19 +122,16 @@ function App() {
                   <span className="code-editor-title">pipeline.py</span>
                 </div>
                 <div className="code-editor-body">
-                  {L(1, <><span className="tk-kw">from</span> <span className="tk-var">em_matcher</span> <span className="tk-kw">import</span> <span className="tk-cls">EntityMatcher</span></>)}
+                  {L(1, <><span className="tk-kw">from</span> <span className="tk-var">metalmatcher</span> <span className="tk-kw">import</span> <span className="tk-cls">Matcher</span></>)}
                   {L(2, '')}
-                  {L(3, <><span className="tk-cmt"># Initialize — auto-detects optimal config</span></>)}
-                  {L(4, <><span className="tk-var">matcher</span> <span className="tk-op">=</span> <span className="tk-cls">EntityMatcher</span>(</>)}
-                  {L(5, <><span className="tk-var">    mode</span><span className="tk-op">=</span><span className="tk-str">'standard'</span>,</>)}
-                  {L(6, <><span className="tk-var">    hash_mode</span><span className="tk-op">=</span><span className="tk-str">'balanced'</span></>)}
-                  {L(7, <><span className="tk-op">)</span></>)}
-                  {L(8, '')}
-                  {L(9, <><span className="tk-cmt"># Stage 1: GPU blocking</span></>)}
-                  {L(10, <><span className="tk-var">candidates</span>, <span className="tk-var">metrics</span> <span className="tk-op">=</span> <span className="tk-var">matcher</span>.<span className="tk-fn">match</span>(</>)}
-                  {L(11, <><span className="tk-var">    table_a</span>, <span className="tk-var">table_b</span>,</>)}
-                  {L(12, <><span className="tk-var">    return_metrics</span><span className="tk-op">=</span><span className="tk-num">True</span></>)}
-                  {L(13, <><span className="tk-op">)</span></>)}
+                  {L(3, <><span className="tk-cmt"># Initialize matcher</span></>)}
+                  {L(4, <><span className="tk-var">matcher</span> <span className="tk-op">=</span> <span className="tk-cls">Matcher</span>()</>)}
+                  {L(5, '')}
+                  {L(6, <><span className="tk-cmt"># Stage 1: Generate candidates</span></>)}
+                  {L(7, <><span className="tk-var">candidates</span> <span className="tk-op">=</span> <span className="tk-var">matcher</span>.<span className="tk-fn">block</span>(</>)}
+                  {L(8, <><span className="tk-var">    table_a</span>,</>)}
+                  {L(9, <><span className="tk-var">    table_b</span></>)}
+                  {L(10, <><span className="tk-op">)</span></>)}
                 </div>
               </div>
             </div>
@@ -150,15 +147,15 @@ function App() {
             </div>
             <div className="pipeline-grid">
               <div className="pipeline-info">
-                <h3>GPU Features + Embeddings + String Similarity</h3>
+                <h3>Advanced Feature Engineering</h3>
                 <p>
                   Extracts a rich feature set for each candidate pair — combining Metal-accelerated
-                  similarity kernels, string-distance measures, and robust cross-domain features
+                  similarity measures, embeddings, and proprietary cross-domain features
                   that generalize across datasets.
                 </p>
                 <ul>
-                  <li><span className="check">✓</span> GPU-accelerated Jaccard, cosine, TF-IDF</li>
-                  <li><span className="check">✓</span> Robust string features (Levenshtein, Jaro-Winkler)</li>
+                  <li><span className="check">✓</span> GPU-accelerated similarity computation</li>
+                  <li><span className="check">✓</span> Multi-dimensional feature extraction</li>
                   <li><span className="check">✓</span> Column-agnostic — works on any schema</li>
                 </ul>
               </div>
@@ -172,18 +169,14 @@ function App() {
                   <span className="code-editor-title">features.py</span>
                 </div>
                 <div className="code-editor-body">
-                  {L(1, <><span className="tk-kw">from</span> <span className="tk-var">em_matcher.gpu_universal_features</span> <span className="tk-kw">import</span> \</>)}
-                  {L(2, <><span className="tk-var">    </span><span className="tk-fn">extract_features_for_candidates_gpu</span></>)}
-                  {L(3, <><span className="tk-kw">from</span> <span className="tk-var">em_matcher.robust_features</span> <span className="tk-kw">import</span> \</>)}
-                  {L(4, <><span className="tk-var">    </span><span className="tk-fn">extract_robust_features</span></>)}
-                  {L(5, '')}
-                  {L(6, <><span className="tk-cmt"># GPU-accelerated feature extraction</span></>)}
-                  {L(7, <><span className="tk-var">candidates</span> <span className="tk-op">=</span> <span className="tk-fn">extract_features_for_candidates_gpu</span>(</>)}
-                  {L(8, <><span className="tk-var">    candidates</span>, <span className="tk-var">table_a</span>, <span className="tk-var">table_b</span></>)}
-                  {L(9, <><span className="tk-op">)</span></>)}
-                  {L(10, '')}
-                  {L(11, <><span className="tk-cmt"># Add robust cross-domain features</span></>)}
-                  {L(12, <><span className="tk-var">robust</span> <span className="tk-op">=</span> <span className="tk-fn">extract_robust_features</span>(<span className="tk-var">candidates</span>, <span className="tk-var">table_a</span>, <span className="tk-var">table_b</span>)</>)}
+                  {L(1, <><span className="tk-kw">from</span> <span className="tk-var">metalmatcher</span> <span className="tk-kw">import</span> <span className="tk-fn">extract_features</span></>)}
+                  {L(2, '')}
+                  {L(3, <><span className="tk-cmt"># Stage 2: Extract features</span></>)}
+                  {L(4, <><span className="tk-var">features</span> <span className="tk-op">=</span> <span className="tk-fn">extract_features</span>(</>)}
+                  {L(5, <><span className="tk-var">    candidates</span>,</>)}
+                  {L(6, <><span className="tk-var">    table_a</span>,</>)}
+                  {L(7, <><span className="tk-var">    table_b</span></>)}
+                  {L(8, <><span className="tk-op">)</span></>)}
                 </div>
               </div>
             </div>
@@ -199,16 +192,16 @@ function App() {
             </div>
             <div className="pipeline-grid">
               <div className="pipeline-info">
-                <h3>LightGBM Classifier + 1-to-1 Matching</h3>
+                <h3>ML Prediction & Adaptive Selection</h3>
                 <p>
-                  A pretrained LightGBM classifier scores every candidate pair. Instead of brittle
-                  fixed thresholds, MetalMatcher uses <strong>adaptive 1-to-1 matching</strong> that
+                  A pretrained machine learning model scores every candidate pair. Instead of brittle
+                  fixed thresholds, MetalMatcher uses <strong>adaptive selection</strong> that
                   works robustly across datasets with different match rates.
                 </p>
                 <ul>
                   <li><span className="check">✓</span> Pretrained universal model — no retraining needed</li>
-                  <li><span className="check">✓</span> Adaptive top-k selection, not fixed thresholds</li>
-                  <li><span className="check">✓</span> 1-to-1 constraint for clean, deduplicated output</li>
+                  <li><span className="check">✓</span> Adaptive selection, not fixed thresholds</li>
+                  <li><span className="check">✓</span> Intelligent constraints for clean output</li>
                 </ul>
               </div>
               <div className="code-editor">
@@ -221,18 +214,14 @@ function App() {
                   <span className="code-editor-title">predict.py</span>
                 </div>
                 <div className="code-editor-body">
-                  {L(1, <><span className="tk-cmt"># Score all candidate pairs</span></>)}
-                  {L(2, <><span className="tk-var">predictions</span> <span className="tk-op">=</span> <span className="tk-var">model</span>.<span className="tk-fn">predict</span>(<span className="tk-var">X</span>)</>)}
-                  {L(3, <><span className="tk-var">candidates</span>[<span className="tk-str">'ml_score'</span>] <span className="tk-op">=</span> <span className="tk-var">predictions</span></>)}
-                  {L(4, '')}
-                  {L(5, <><span className="tk-cmt"># Adaptive 1-to-1 matching</span></>)}
-                  {L(6, <><span className="tk-kw">from</span> <span className="tk-var">em_matcher.adaptive_matcher</span> <span className="tk-kw">import</span> <span className="tk-fn">adaptive_matching</span></>)}
-                  {L(7, '')}
-                  {L(8, <><span className="tk-var">results</span> <span className="tk-op">=</span> <span className="tk-fn">adaptive_matching</span>(</>)}
-                  {L(9, <><span className="tk-var">    candidates</span>,</>)}
-                  {L(10, <><span className="tk-var">    score_col</span><span className="tk-op">=</span><span className="tk-str">'ml_score'</span>,</>)}
-                  {L(11, <><span className="tk-var">    force_strategy</span><span className="tk-op">=</span><span className="tk-str">'1-to-1'</span></>)}
-                  {L(12, <><span className="tk-op">)</span></>)}
+                  {L(1, <><span className="tk-cmt"># Stage 3: Score and select matches</span></>)}
+                  {L(2, <><span className="tk-var">scores</span> <span className="tk-op">=</span> <span className="tk-var">matcher</span>.<span className="tk-fn">predict</span>(<span className="tk-var">features</span>)</>)}
+                  {L(3, '')}
+                  {L(4, <><span className="tk-cmt"># Adaptive selection</span></>)}
+                  {L(5, <><span className="tk-var">results</span> <span className="tk-op">=</span> <span className="tk-var">matcher</span>.<span className="tk-fn">select_matches</span>(</>)}
+                  {L(6, <><span className="tk-var">    candidates</span>,</>)}
+                  {L(7, <><span className="tk-var">    scores</span></>)}
+                  {L(8, <><span className="tk-op">)</span></>)}
                 </div>
               </div>
             </div>
