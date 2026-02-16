@@ -1,143 +1,380 @@
-/* ========================================
-   Distributed Architecture Section
-   ======================================== */
+/* ═══════════════════════════════════════════════════════════
+   Distributed Architecture — Premium Visualization
+   ═══════════════════════════════════════════════════════════ */
 
 .distributed-section {
   position: relative;
   overflow: hidden;
+  padding: 100px 0 80px;
 }
 
-.distributed-section::before {
-  content: '';
+/* ── Ambient Glows ── */
+.dist-glow {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 900px;
-  height: 600px;
-  background: radial-gradient(ellipse, rgba(99, 102, 241, 0.06), transparent 70%);
+  border-radius: 50%;
   pointer-events: none;
+  filter: blur(120px);
+  z-index: 0;
 }
 
-.distributed-layout {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
-  align-items: center;
-  margin-top: 72px;
+.dist-glow-1 {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  left: -200px;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.10) 0%, transparent 70%);
 }
 
-/* ── SVG Diagram ── */
-
-.arch-diagram-wrap {
-  position: relative;
+.dist-glow-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.08) 0%, transparent 70%);
 }
 
-.arch-diagram {
-  width: 100%;
-  height: auto;
-  max-width: 600px;
-  margin: 0 auto;
-  display: block;
-}
-
-/* ── Stage Legend ── */
-
-.stage-legend {
+/* ── Stage Progress Timeline ── */
+.stage-progress-track {
   display: flex;
-  gap: 24px;
+  align-items: center;
   justify-content: center;
-  margin-top: 24px;
+  gap: 0;
+  margin: 48px auto 40px;
+  max-width: 900px;
 }
 
-.legend-item {
+.stage-progress-step {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.8125rem;
-  color: var(--text-2);
-  transition: color 0.3s, opacity 0.3s;
-  opacity: 0.5;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(100, 116, 139, 0.5);
+  white-space: nowrap;
+  position: relative;
 }
 
-.legend-item.active {
-  opacity: 1;
-  color: var(--text-0);
+.stage-progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(55, 65, 81, 0.5);
+  flex-shrink: 0;
 }
 
-.legend-dot {
+.stage-progress-connector {
+  width: 28px;
+  height: 2px;
+  margin-left: 8px;
+  border-radius: 2px;
+  background: rgba(55, 65, 81, 0.2);
+  flex-shrink: 0;
+}
+
+/* ── Flow Diagram Layout ── */
+.flow-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0 auto;
+  max-width: 1000px;
+  min-height: 320px;
+  position: relative;
+}
+
+/* ── SVG flow paths ── */
+.flow-svg {
+  width: 120px;
+  flex-shrink: 0;
+  height: 280px;
+}
+
+/* ── Controller Node ── */
+.controller-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 100px;
+}
+
+.controller-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(129, 140, 248, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.controller-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.controller-sublabel {
+  font-size: 0.7rem;
+  color: rgba(148, 163, 184, 0.7);
+  text-align: center;
+}
+
+/* ── Results Node ── */
+.results-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 100px;
+  border: 1px solid rgba(55, 65, 81, 0.4);
+  border-radius: 16px;
+  padding: 16px 8px;
+  background: rgba(52, 211, 153, 0.03);
+  transition: border-color 0.5s, background 0.5s;
+}
+
+.results-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(52, 211, 153, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.results-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-align: center;
+}
+
+.results-sublabel {
+  font-size: 0.65rem;
+  color: rgba(148, 163, 184, 0.6);
+}
+
+/* ── Workers Column ── */
+.workers-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Worker Cards ── */
+.worker-card {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(55, 65, 81, 0.35);
+  border-radius: 14px;
+  padding: 1px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s;
+}
+
+.worker-card:hover {
+  border-color: rgba(129, 140, 248, 0.3);
+}
+
+.worker-card-inner {
+  padding: 14px 18px;
+}
+
+.worker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.worker-gpu-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #818cf8;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.worker-status-dot {
   width: 8px;
   height: 8px;
+  border-radius: 50%;
+  transition: all 0.4s;
+}
+
+/* ── Worker Mini Pipeline ── */
+.worker-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.worker-stage-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding: 3px 0;
+}
+
+.worker-stage-indicator {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
-/* ── Info Panel ── */
-
-.distributed-info {
-  padding: 0 8px;
+.worker-stage-label {
+  font-size: 0.68rem;
+  color: rgba(148, 163, 184, 0.5);
+  font-weight: 500;
+  transition: color 0.3s;
+  min-width: 52px;
 }
 
-.dist-feature-list {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+.worker-stage-label.active {
+  color: #e2e8f0;
 }
 
-.dist-feature-item {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  padding: 20px;
+.worker-stage-label.done {
+  color: rgba(52, 211, 153, 0.7);
+}
+
+.worker-check {
+  font-size: 0.65rem;
+  color: #34d399;
+  margin-left: auto;
+}
+
+.worker-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+  transform-origin: left;
+  opacity: 0.5;
+}
+
+/* ── Feature Highlight Cards ── */
+.dist-highlights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 64px;
+}
+
+.dist-highlight-card {
+  background: rgba(15, 23, 42, 0.35);
+  border: 1px solid rgba(55, 65, 81, 0.3);
   border-radius: 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: all 0.4s var(--ease-out-expo);
+  padding: 24px 20px;
+  transition: border-color 0.3s, transform 0.3s;
 }
 
-.dist-feature-item:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  background: rgba(31, 41, 55, 0.5);
-  transform: translateX(6px);
+.dist-highlight-card:hover {
+  border-color: rgba(129, 140, 248, 0.3);
+  transform: translateY(-2px);
 }
 
-.dist-feature-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-  margin-top: 2px;
+.dist-highlight-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(129, 140, 248, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
 }
 
-.dist-feature-item h4 {
-  font-size: 1rem;
-  font-weight: 700;
+.dist-highlight-card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
   margin-bottom: 6px;
-  color: var(--text-0);
 }
 
-.dist-feature-item p {
-  font-size: 0.875rem;
-  color: var(--text-1);
-  line-height: 1.6;
+.dist-highlight-card p {
+  font-size: 0.78rem;
+  color: rgba(148, 163, 184, 0.7);
+  line-height: 1.5;
 }
 
-@media (max-width: 968px) {
-  .distributed-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
+/* ═══ Responsive ═══ */
+@media (max-width: 900px) {
+  .flow-diagram {
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .arch-diagram {
-    max-width: 480px;
+  .flow-svg {
+    width: 100px;
+    height: 100px;
+    transform: rotate(90deg);
+  }
+
+  .workers-column {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .worker-card {
+    min-width: 180px;
+    flex: 1;
+    max-width: 220px;
+  }
+
+  .stage-progress-track {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .stage-progress-connector {
+    display: none;
+  }
+
+  .dist-highlights {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
 }
 
 @media (max-width: 600px) {
-  .stage-legend {
-    flex-wrap: wrap;
-    gap: 12px;
+  .distributed-section {
+    padding: 60px 0 40px;
   }
 
-  .arch-diagram {
-    max-width: 100%;
+  .flow-diagram {
+    min-height: auto;
+  }
+
+  .dist-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .controller-node,
+  .results-node {
+    width: 80px;
+  }
+
+  .stage-progress-step span {
+    font-size: 0.6rem;
   }
 }
