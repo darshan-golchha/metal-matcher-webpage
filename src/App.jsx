@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import DistributedArchitecture from './components/DistributedArchitecture'
+import InvestorSection from './components/InvestorSection'
 
 /* ─── tiny helpers ─── */
 const L = (n, content) => (
@@ -33,8 +35,9 @@ function App() {
           <ul className="navbar-links">
             <li><a href="#overview">Overview</a></li>
             <li><a href="#pipeline">Pipeline</a></li>
+            <li><a href="#distributed">Distributed</a></li>
             <li><a href="#features">Features</a></li>
-            <li><a href="#use-cases">Use Cases</a></li>
+            <li><a href="#investors">Investors</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -49,7 +52,8 @@ function App() {
             <span className="gradient-text">MetalMatcher</span>
           </h1>
           <p className="hero-tagline">
-            Autonomous entity matching that's <strong>faster</strong> than CPU solutions.<br />
+            Autonomous entity matching that's <strong>faster</strong> than CPU solutions
+            and <strong>scales</strong> across distributed GPU clusters.<br />
             No manual rules. No labeling. Just fast, intelligent data reconciliation.
           </p>
           <div className="hero-cta">
@@ -289,6 +293,11 @@ function App() {
 
       <hr className="section-divider" />
 
+      {/* ═══════ Distributed Architecture ═══════ */}
+      <DistributedArchitecture />
+
+      <hr className="section-divider" />
+
       {/* ═══════ Key Features ═══════ */}
       <section className="section" id="features">
         <div className="container">
@@ -329,8 +338,9 @@ function App() {
           <div className="stats-grid">
             {[
               { value: '10×', label: 'Faster Than CPU Solutions' },
-              { value: '95%+', label: 'F1 Score on Benchmarks' },
-              { value: '100M+', label: 'Records Processed' },
+              { value: '97.7%', label: 'F1 Score on Benchmarks' },
+              { value: '670K', label: 'Pairs/sec Throughput' },
+              { value: 'N×', label: 'Linear GPU Scalability' },
             ].map((s, i) => (
               <div key={i} className={`stat-item animate-on-scroll stagger-${i + 1}`}>
                 <span className="stat-value">{s.value}</span>
@@ -398,6 +408,11 @@ function App() {
 
       <hr className="section-divider" />
 
+      {/* ═══════ For Investors ═══════ */}
+      <InvestorSection />
+
+      <hr className="section-divider" />
+
       {/* ═══════ Technology ═══════ */}
       <section className="section section-center">
         <div className="container">
@@ -425,8 +440,7 @@ function App() {
               Available for cloud-native startups and enterprises requiring on-premise control.
             </p>
             <div className="hero-cta">
-              <a href="mailto:contact@metalmatcher.com" className="btn btn-primary">Get in Touch</a>
-              <a href="https://github.com/metalmatcher" className="btn btn-secondary">View on GitHub</a>
+              <a href="mailto:darshangolchha2003@gmail.com" className="btn btn-primary">Get in Touch</a>
             </div>
           </div>
         </div>

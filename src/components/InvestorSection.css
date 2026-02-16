@@ -1,0 +1,248 @@
+/* ========================================
+   Investor Section
+   ======================================== */
+
+.investor-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* ── Market Stats ── */
+
+.investor-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 72px;
+}
+
+.investor-stat-item {
+    text-align: center;
+    padding: 32px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    backdrop-filter: blur(16px);
+    transition: all 0.5s var(--ease-out-expo);
+}
+
+.investor-stat-item:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.animated-number {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.investor-stat-item p {
+    font-size: 0.875rem;
+    color: var(--text-1);
+    font-weight: 500;
+}
+
+/* ── Competitive Table ── */
+
+.comp-table-wrap {
+    margin-top: 80px;
+}
+
+.comp-table-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.comp-table-scroll {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+}
+
+.comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.comp-table thead {
+    background: rgba(6, 8, 13, 0.6);
+}
+
+.comp-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.comp-table td {
+    padding: 16px 20px;
+    color: var(--text-1);
+    border-bottom: 1px solid rgba(55, 65, 81, 0.2);
+}
+
+.comp-table tbody tr {
+    transition: background 0.3s;
+}
+
+.comp-table tbody tr:hover {
+    background: rgba(99, 102, 241, 0.04);
+}
+
+.highlight-row {
+    background: rgba(99, 102, 241, 0.08) !important;
+    position: relative;
+}
+
+.highlight-row td {
+    color: var(--text-0) !important;
+    font-weight: 600;
+}
+
+.highlight-row td:first-child {
+    position: relative;
+}
+
+.highlight-row td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: var(--grad-primary);
+    border-radius: 3px;
+}
+
+.comp-name {
+    font-weight: 700;
+    color: var(--text-0);
+}
+
+.check-yes {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.check-no {
+    color: var(--rose);
+    opacity: 0.7;
+    font-size: 1rem;
+}
+
+/* ── Why Now ── */
+
+.why-now-section {
+    margin-top: 80px;
+}
+
+.why-now-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.why-now-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.why-now-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px 28px;
+    backdrop-filter: blur(16px);
+    transition: all 0.5s var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+}
+
+.why-now-card:hover {
+    border-color: rgba(99, 102, 241, 0.25);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+}
+
+.why-now-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--card-accent) 12%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.why-now-icon {
+    font-size: 1.5rem;
+}
+
+.why-now-card h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-0);
+}
+
+.why-now-card p {
+    font-size: 0.875rem;
+    color: var(--text-1);
+    line-height: 1.65;
+}
+
+.why-now-accent-line {
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.why-now-card:hover .why-now-accent-line {
+    opacity: 0.6;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 968px) {
+    .investor-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why-now-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .investor-stats {
+        grid-template-columns: 1fr;
+    }
+}
